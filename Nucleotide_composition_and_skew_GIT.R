@@ -23,14 +23,14 @@ library(openxlsx)
 # en una tabla. 
 
 # Load the sequences and create an object for each with readDNAStringSet
-# Sequences do not have to be aligned, values are calculated for each separatedly.
+# Sequences do not have to be aligned, values are calculated for each separately.
 
 # Incluye el número de secuencias que quieras analizar.
 # Include any number of sequences. 
 
-morenoi <- readDNAStringSet("/Your_file.fas")
-mutica_c <- readDNAStringSet("/Your_file.fas")
-mutica_I <- readDNAStringSet("/Your_file.fas")
+Sequence1 <- readDNAStringSet("/Your_file.fas")
+Sequence2 <- readDNAStringSet("/Your_file.fas")
+Sequence3 <- readDNAStringSet("/Your_file.fas")
 
 # Creamos un set con todas las secuencias.
 # Create a larger set with all the sequences.
