@@ -16,8 +16,8 @@ Combined.log. Repeat separately for the .trees files -> Combined.trees.
 
 Command-line equivalent:
 ```
-logcombiner -log Dated_1.log -log Dated_2.log -burnin 10 -o Combined.log
-logcombiner -log Dated_1.trees -log Dated_2.trees -burnin 10 -o Combined.trees
+logcombiner -log 1Dated.log -log 2Dated.log -burnin 10 -o Combined.log
+logcombiner -log 1Dated.trees -log 2Dated.trees -burnin 10 -o Combined.trees
 ```
 (Adjust -burnin to the percentage/generation count appropriate for your
 runs; confirm convergence and ESS > 200 in Tracer before combining.)
