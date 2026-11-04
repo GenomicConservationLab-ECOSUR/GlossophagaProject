@@ -1,3 +1,5 @@
+setwd("Your directory")
+
 library(tidyverse)
 library(httr)
 library(jsonlite)
@@ -25,8 +27,6 @@ library(jsonlite)
 # 5. Duplicate windows: candidate windows overlapping multiple GFF gene
 #    models that resolve to the same final identity (matched
 #    case-insensitively) are collapsed, keeping the strongest hit.
-
-setwd("/run/media/rocamontes/EcosurMutica/Pixy/Pixy_2026/output_environmental")
 
 CLUSTERS <- c("Concha", "Hobo_Ixta", "Nizanda", "Poana", "Quilamula")
 
@@ -223,5 +223,3 @@ for (cluster in CLUSTERS) {
   write_csv(final_table, output_file)
   cat("  - Saved:", output_file, "\n")
 }
-
-cat("\nAll environmental clusters processed.\n")
