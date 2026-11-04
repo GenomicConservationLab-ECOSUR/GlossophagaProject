@@ -1,3 +1,5 @@
+setwd("Your directory")
+
 library(tidyverse)
 
 # Identify candidate selective-sweep windows for each environmental cluster
@@ -5,7 +7,6 @@ library(tidyverse)
 # below-average pi in the focal cluster. Requires pixy output from
 # 18_pixy_pipeline.sh.
 
-setwd("/run/media/rocamontes/EcosurMutica/Pixy/Pixy_2026/output_environmental")
 
 environmental_clusters <- c("Concha", "Hobo_Ixta", "Nizanda", "Poana", "Quilamula")
 
