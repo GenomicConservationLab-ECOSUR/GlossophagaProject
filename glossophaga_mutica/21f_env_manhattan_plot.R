@@ -1,3 +1,5 @@
+setwd("Your directory")
+
 library(tidyverse)
 library(ggrepel)
 
@@ -19,8 +21,6 @@ library(ggrepel)
 # nearby positions) is the same gene, not a paralog family, and must not
 # be mislabeled as a "cluster".
 
-setwd("/run/media/rocamontes/EcosurMutica/Pixy/Pixy_2026/output_environmental")
-
 CLUSTERS <- c("Concha", "Hobo_Ixta", "Nizanda")
 
 chr_map <- c(
@@ -41,14 +41,14 @@ for (cluster in CLUSTERS) {
     next
   }
 
-  # 1. Load background data
+# Load background data
   dxy_data <- read_tsv(dxy_file, show_col_types = FALSE) %>%
     filter(!is.na(avg_dxy)) %>%
     mutate(CHR_ID = as.numeric(recode(chromosome, !!!chr_map))) %>%
     filter(!is.na(CHR_ID)) %>%
     arrange(CHR_ID, window_pos_1)
 
-  # 2. Cumulative genome-wide coordinates
+# Cumulative genome-wide coordinates
   data_cum <- dxy_data %>%
     group_by(CHR_ID) %>%
     summarise(max_bp = max(window_pos_1)) %>%
@@ -63,7 +63,7 @@ for (cluster in CLUSTERS) {
     group_by(CHR_ID) %>%
     summarize(center = mean(bp_cum))
 
-  # 3. Load corrected annotations, genuine protein-coding candidates only
+# Load corrected annotations, genuine protein-coding candidates only
   highlight_genes <- read_csv(anno_file, show_col_types = FALSE) %>%
     filter(Is_Significant, !Is_TE_Hit, !No_Blast_Hit) %>%
     mutate(
@@ -78,19 +78,19 @@ for (cluster in CLUSTERS) {
     next
   }
 
-  # 3b. Generalized gene-family cluster collapsing.
-  # First, suppress labels for locus tags that passed significance
-  # filtering but never resolved to a real gene name (no GN= field in
-  # their matching UniProt entry) -- the point stays plotted, only the
-  # uninformative raw tag text is dropped (matches the island analysis).
+# 3b. Generalized gene-family cluster collapsing.
+# First, suppress labels for locus tags that passed significance
+# filtering but never resolved to a real gene name (no GN= field in
+# their matching UniProt entry) -- the point stays plotted, only the
+# uninformative raw tag text is dropped (matches the island analysis).
   highlight_genes <- highlight_genes %>%
     mutate(Plot_Label = if_else(str_detect(Plot_Label, "^AAES06"), NA_character_, Plot_Label))
 
-  # family_root: uppercase gene symbol with trailing digits/hyphens
-  # stripped (e.g. "OR2A14" -> "OR2A", "KRTAP10-7" -> "KRTAP",
-  # "ZNF432" -> "ZNF"). Only collapse when a root has multiple DISTINCT
-  # gene symbols (true paralogs) -- not merely multiple rows, which can
-  # happen when one gene spans two adjacent, overlapping windows.
+# family_root: uppercase gene symbol with trailing digits/hyphens
+# stripped (e.g. "OR2A14" -> "OR2A", "KRTAP10-7" -> "KRTAP",
+# "ZNF432" -> "ZNF"). Only collapse when a root has multiple DISTINCT
+# gene symbols (true paralogs) -- not merely multiple rows, which can
+# happen when one gene spans two adjacent, overlapping windows.
   label_data <- highlight_genes %>%
     filter(!is.na(Plot_Label)) %>%
     mutate(family_root = str_remove(str_to_upper(Plot_Label), "[0-9-]+$"))
@@ -125,7 +125,7 @@ for (cluster in CLUSTERS) {
     label_data <- label_data[, c("bp_cum", "Max_Dxy", "Plot_Label")]
   }
 
-  # 4. Generate the plot
+# Generate the plot
   p <- ggplot(plot_data, aes(x = bp_cum, y = avg_dxy)) +
     geom_point(aes(color = as.factor(CHR_ID %% 2)), alpha = 0.25, size = 0.8) +
     scale_color_manual(values = c("grey75", "grey45")) +
@@ -160,5 +160,3 @@ for (cluster in CLUSTERS) {
   ggsave(paste0("Manhattan_", cluster, ".pdf"), p, width = 12, height = 6)
   cat(sprintf("Saved: Manhattan_%s.pdf\n", cluster))
 }
-
-cat("\nAll clusters processed.\n")
