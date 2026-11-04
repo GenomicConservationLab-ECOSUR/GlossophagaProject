@@ -5,7 +5,7 @@
 # present, LIG, and LGM climate scenarios using kuenm2/maxnet (pure R,
 # no MaxEnt GUI/Java required).
 
-setwd("/run/media/rocamontes/EcosurMutica/niche/niche_modeling")
+setwd("Directory with your data")
 
 # Packages ----------------------------------------------------------------
 packages <- c(
