@@ -1,3 +1,5 @@
+setwd("Your directory")
+
 library(tidyverse)
 
 # Build the base candidate-window annotation table (position, gene symbol,
@@ -9,8 +11,6 @@ library(tidyverse)
 # function -- do not merge BLAST results here (see 19e for the corrected
 # merge logic: proper accession parsing and TE/named-gene-mismatch
 # handling).
-
-setwd("/run/media/rocamontes/EcosurMutica/Pixy/Pixy_2026/output_island")
 
 chr_map <- c(
   "CM077303.1" = "1",  "CM077304.1" = "2",  "CM077305.1" = "3",

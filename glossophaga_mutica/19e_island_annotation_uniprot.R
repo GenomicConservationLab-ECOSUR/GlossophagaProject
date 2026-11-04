@@ -1,3 +1,5 @@
+setwd("Your directory")
+
 library(tidyverse)
 
 # Build the publication-ready main-text table: genuine, BLAST-confirmed
@@ -8,7 +10,6 @@ library(tidyverse)
 # categories) remains available in Validated_Island_Annotations_Corrected.csv
 # for supplementary reporting/reproducibility.
 
-setwd("/run/media/rocamontes/EcosurMutica/Pixy/Pixy_2026/output_island")
 
 df <- read_csv("Validated_Island_Annotations_Corrected.csv", show_col_types = FALSE)
 
