@@ -9,7 +9,7 @@ since its output feeds the pixy population map).
 00-04   Read alignment, alignment stats, variant calling, and filtering
         to the population-genetics SNP dataset (PLINK-ready).
 
-05-07   Population structure: PCA and ADMIXTURE (K=1-6).
+05-07   Population structure: PCA and ADMIXTURE (K=2-5).
 
 08a-08f Mitogenomic phylogenetics: coding gene extraction, alignment,
         supermatrix assembly, partition search (IQ-TREE), and BEAST
