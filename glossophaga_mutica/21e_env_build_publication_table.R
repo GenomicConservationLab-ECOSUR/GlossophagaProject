@@ -1,3 +1,5 @@
+setwd("Your directory")
+
 library(tidyverse)
 
 # Build publication-ready tables for each environmental cluster: genuine,
@@ -11,7 +13,6 @@ library(tidyverse)
 # confirmed genuine gene deserts, not a pipeline error) are skipped
 # automatically if their Corrected file does not exist.
 
-setwd("/run/media/rocamontes/EcosurMutica/Pixy/Pixy_2026/output_environmental")
 
 CLUSTERS <- c("Concha", "Hobo_Ixta", "Nizanda", "Poana", "Quilamula")
 
@@ -64,5 +65,3 @@ for (cluster in CLUSTERS) {
               n_te, n_below_threshold, n_no_hit))
   cat(sprintf("  Saved: %s\n", output_file))
 }
-
-cat("\nAll clusters processed.\n")
