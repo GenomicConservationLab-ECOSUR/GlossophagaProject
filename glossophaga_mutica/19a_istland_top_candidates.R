@@ -1,10 +1,10 @@
+setwd("Your directoy")
+
 library(tidyverse)
 
 # Identify candidate selective-sweep windows for Island vs. Mainland:
 # top 1% Dxy (empirical), combined with below-average pi in the Island
 # population. Requires pixy output from 18_pixy_pipeline.sh.
-
-setwd("/run/media/rocamontes/EcosurMutica/Pixy/Pixy_2026/output_island")
 
 dxy_data <- read_tsv("Island_vs_Mainland_dxy.txt", show_col_types = FALSE)
 pi_data  <- read_tsv("Island_vs_Mainland_pi.txt", show_col_types = FALSE)
